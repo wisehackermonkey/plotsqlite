@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/" >
+        <file>icons/midv_logo.png</file>
+        <file>icons/plotsqliteicon.png</file>
+        <file>icons/plotsqliteicon.ico</file>
+        <file>icons/plotsqliteicon.svg</file>
+    </qresource>
+</RCC>
