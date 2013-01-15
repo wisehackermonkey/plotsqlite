@@ -458,9 +458,10 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
         self.ycol3=self.ycol_ComboBox_3.currentText()
 
     def readsettings(self): #only used when application starts, to load default values from last run
-        if len(str(self.settings.value('db',type='QString')))>0:
+        #if len(str(self.settings.value('db',type='QString')))>0:
+        if len((self.settings.value('db')).toString())>0:
             self.database = self.settings.value('db',type='QString')
-            print self.database
+            #print self.database
             self.openDBFile()
 
             try:#table1
