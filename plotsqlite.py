@@ -24,7 +24,6 @@ from matplotlib.backends.backend_qt4agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.backends.backend_qt4agg import NavigationToolbar2QTAgg as NavigationToolbar
 import datetime
 import matplotlib.ticker as tick
-from HtmlDialog import HtmlDialog
 from PlotSQLite_MainWindow import Ui_MainWindow
 from configobj import ConfigObj
 
@@ -589,12 +588,12 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
             except:
                 print 'nothing to be done for table3'
                 
-    def about(self):   
-        filenamepath = os.path.join(os.sep,os.path.dirname(os.path.abspath(__file__)),"about.htm")
-        #print os.path.dirname(os.path.abspath(__file__)) debugging
-        dlg = HtmlDialog("About PlotSQLite - Midvatten plot generator for reports",QtCore.QUrl.fromLocalFile(filenamepath))
-        dlg.exec_()
-        #QtGui.QMessageBox.information(None, "info", filenamepath)    # debugging
+    def about(self):
+        version = '0.1'
+        contact = 'groundwatergis@gmail.com'
+        web = 'http://sourceforge.net/projects/plotsqlite'
+        TEXT = 'This is PlotSQLite - the Midvatten plot generator.\n\nVersion: ' + version + '\nContact: ' + contact + '\nMore info: ' + web 
+        QtGui.QMessageBox.information(None, "info", TEXT.encode('utf-8')) 
         
                 
 def sql_load_fr_db(dbpath, sql=''):
