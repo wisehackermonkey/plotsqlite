@@ -11,6 +11,8 @@ email                : groundwatergis@gmail.com
 # Import the sys, os, locale and PyQt libraries
 import sys, os, locale
 from PyQt4 import QtGui, QtCore, uic#, QtSql
+from PyQt4.QtCore import *
+from PyQt4.QtGui import *
 from functools import partial # only to get combobox signals to work
 
 # 
