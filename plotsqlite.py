@@ -39,7 +39,7 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
                 
         self.setupUi( self )#due to initialisation of Ui_MainWindow instance
         self.initUI()
-
+        self.maxtstep = 0
         #self.database = ''
         #self.table1 = ''
         #self.database_pyqt4provider = QtSql.QSqlDatabase.addDatabase("QSQLITE","db1")
@@ -106,6 +106,7 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
         self.p=[]
         self.plabels=[]
         if not (self.table1 == '' or self.table1==' ') and not (self.xcol1== '' or self.xcol1==' ') and not (self.ycol1== '' or self.ycol1==' '): #if anything is to be plotted from tab 1
+            self.maxtstep = self.spnmaxtstep.value()   # if user selected a time step bigger than zero than thre may be discontinuous plots
             plottable1='y'
             filter1 = str(self.Filter1_ComboBox_1.currentText())
             filter1list = self.Filter1_QListWidget_1.selectedItems()
@@ -142,6 +143,7 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
                     i += 1
 
         if not (self.table2 == '' or self.table2==' ') and not (self.xcol2== '' or self.xcol2==' ') and not (self.ycol2== '' or self.ycol2==' '):#if anything is to be plotted from tab 2
+            self.maxtstep = self.spnmaxtstep.value()   # if user selected a time step bigger than zero than thre may be discontinuous plots
             plottable2='y'
             filter1 = str(self.Filter1_ComboBox_2.currentText())
             filter1list = self.Filter1_QListWidget_2.selectedItems()
@@ -177,6 +179,7 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
                     i += 1
             
         if not (self.table3 == '' or self.table3==' ') and not (self.xcol3== '' or self.xcol3==' ') and not (self.ycol3== '' or self.ycol3==' '):#if anything is to be plotted from tab 3
+            self.maxtstep = self.spnmaxtstep.value()   # if user selected a time step bigger than zero than thre may be discontinuous plots
             plottable3='y'
             filter1 = str(self.Filter1_ComboBox_3.currentText())
             filter1list = self.Filter1_QListWidget_3.selectedItems()
@@ -228,6 +231,13 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
             myTimestring.append(table2.date_time[j])
             j = j + 1
         numtime=datestr2num(myTimestring)  #conv list of strings to numpy.ndarray of floats
+        
+        # from version 0.2 there is a possibility to make discontinuous plot if timestep bigger than maxtstep
+        if self.maxtstep > 0: # if user selected a time step bigger than zero than thre may be discontinuous plots
+            pos = np.where(np.abs(np.diff(numtime)) >= self.maxtstep)[0]
+            numtime[pos] = np.nan
+            table2.values[pos] = np.nan
+        
         if plottype == "marker":
                 self.p[i], = self.axes.plot_date(numtime, table2.values,  'o',label=self.plabels[i])  
         elif plottype  == "line":
@@ -589,7 +599,7 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
                 print 'nothing to be done for table3'
                 
     def about(self):
-        version = '0.1'
+        version = '0.2'
         contact = 'groundwatergis@gmail.com'
         web = 'http://sourceforge.net/projects/plotsqlite'
         TEXT = 'This is PlotSQLite - the Midvatten plot generator.\n\nVersion: ' + version + '\nContact: ' + contact + '\nMore info: ' + web 
