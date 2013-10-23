@@ -96,8 +96,7 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
         self.axes.clear()
         My_format = [('date_time', datetime.datetime), ('values', float)] #Define (with help from function datetime) a good format for numpy array
         
-        #conn = sqlite.connect(str(self.selected_database_QLineEdit.text()).encode('latin-1'),detect_types=sqlite.PARSE_DECLTYPES|sqlite.PARSE_COLNAMES)#this is best on windows
-        conn = sqlite.connect(str(self.selected_database_QLineEdit.text()).encode(locale.getdefaultlocale()[1]),detect_types=sqlite.PARSE_DECLTYPES|sqlite.PARSE_COLNAMES)#should be cross-platform
+        conn = sqlite.connect(unicode(self.selected_database_QLineEdit.text()),detect_types=sqlite.PARSE_DECLTYPES|sqlite.PARSE_COLNAMES)#should be cross-platform
         # skapa en cursor
         curs = conn.cursor()
 
@@ -108,9 +107,9 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
         if not (self.table1 == '' or self.table1==' ') and not (self.xcol1== '' or self.xcol1==' ') and not (self.ycol1== '' or self.ycol1==' '): #if anything is to be plotted from tab 1
             self.maxtstep = self.spnmaxtstep.value()   # if user selected a time step bigger than zero than thre may be discontinuous plots
             plottable1='y'
-            filter1 = str(self.Filter1_ComboBox_1.currentText())
+            filter1 = unicode(self.Filter1_ComboBox_1.currentText())
             filter1list = self.Filter1_QListWidget_1.selectedItems()
-            filter2 = str(self.Filter2_ComboBox_1.currentText())
+            filter2 = unicode(self.Filter2_ComboBox_1.currentText())
             filter2list= self.Filter2_QListWidget_1.selectedItems()
             nop += max(len(filter1list),1)*max(len(filter2list),1)
             #self.p= [None]*nop#list for plot objects
@@ -120,34 +119,34 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
                 if not (filter1 == '' or filter1==' ') and not (filter2== '' or filter2==' '):
                     for item1 in filter1list:
                         for item2 in filter2list:
-                            sql = r""" select """ + str(self.xcol_ComboBox_1.currentText()) + """, """ + str(self.ycol_ComboBox_1.currentText()) + """ from """ + str(self.table_ComboBox_1.currentText()) + """ where """ + filter1 + """='""" + str(item1.text())+ """' and """ + filter2 + """='""" + str(item2.text())+ """' order by """ + str(self.xcol_ComboBox_1.currentText())
-                            self.plabels[i] = str(item1.text()) + """, """ + str(item2.text())
+                            sql = r""" select """ + unicode(self.xcol_ComboBox_1.currentText()) + """, """ + unicode(self.ycol_ComboBox_1.currentText()) + """ from """ + unicode(self.table_ComboBox_1.currentText()) + """ where """ + filter1 + """='""" + unicode(item1.text())+ """' and """ + filter2 + """='""" + unicode(item2.text())+ """' order by """ + unicode(self.xcol_ComboBox_1.currentText())
+                            self.plabels[i] = unicode(item1.text()) + """, """ + unicode(item2.text())
                             self.createsingleplotobject(sql,i,My_format,curs,self.PlotType_comboBox_1.currentText())
                             i += 1
                 elif not (filter1 == '' or filter1==' '):
                     for item1 in filter1list:
-                        sql = r""" select """ + str(self.xcol_ComboBox_1.currentText()) + """, """ + str(self.ycol_ComboBox_1.currentText()) + """ from """ + str(self.table_ComboBox_1.currentText()) + """ where """ + filter1 + """='""" + str(item1.text())+ """' order by """ + str(self.xcol_ComboBox_1.currentText())
-                        self.plabels[i] = str(item1.text()) 
+                        sql = r""" select """ + unicode(self.xcol_ComboBox_1.currentText()) + """, """ + unicode(self.ycol_ComboBox_1.currentText()) + """ from """ + unicode(self.table_ComboBox_1.currentText()) + """ where """ + filter1 + """='""" + unicode(item1.text())+ """' order by """ + unicode(self.xcol_ComboBox_1.currentText())
+                        self.plabels[i] = unicode(item1.text()) 
                         self.createsingleplotobject(sql,i,My_format,curs,self.PlotType_comboBox_1.currentText())
                         i += 1
                 elif not (filter2 == '' or filter2==' '):
                     for item2 in filter2list:
-                        sql = r""" select """ + str(self.xcol_ComboBox_1.currentText()) + """, """ + str(self.ycol_ComboBox_1.currentText()) + """ from """ + str(self.table_ComboBox_1.currentText()) + """ where """ + filter2 + """='""" + str(item2.text())+ """' order by """ + str(self.xcol_ComboBox_1.currentText())
-                        self.plabels[i] = str(item2.text())
+                        sql = r""" select """ + unicode(self.xcol_ComboBox_1.currentText()) + """, """ + unicode(self.ycol_ComboBox_1.currentText()) + """ from """ + unicode(self.table_ComboBox_1.currentText()) + """ where """ + filter2 + """='""" + unicode(item2.text())+ """' order by """ + unicode(self.xcol_ComboBox_1.currentText())
+                        self.plabels[i] = unicode(item2.text())
                         self.createsingleplotobject(sql,i,My_format,curs,self.PlotType_comboBox_1.currentText())
                         i += 1            
                 else:
-                    sql = r""" select """ + str(self.xcol_ComboBox_1.currentText()) + """, """ + str(self.ycol_ComboBox_1.currentText()) + """ from """ + str(self.table_ComboBox_1.currentText()) + """ order by """ + str(self.xcol_ComboBox_1.currentText())
-                    self.plabels[i] = str(self.ycol_ComboBox_1.currentText())+""", """+str(self.table_ComboBox_1.currentText())
+                    sql = r""" select """ + unicode(self.xcol_ComboBox_1.currentText()) + """, """ + unicode(self.ycol_ComboBox_1.currentText()) + """ from """ + unicode(self.table_ComboBox_1.currentText()) + """ order by """ + unicode(self.xcol_ComboBox_1.currentText())
+                    self.plabels[i] = unicode(self.ycol_ComboBox_1.currentText())+""", """+unicode(self.table_ComboBox_1.currentText())
                     self.createsingleplotobject(sql,i,My_format,curs,self.PlotType_comboBox_1.currentText())
                     i += 1
 
         if not (self.table2 == '' or self.table2==' ') and not (self.xcol2== '' or self.xcol2==' ') and not (self.ycol2== '' or self.ycol2==' '):#if anything is to be plotted from tab 2
             self.maxtstep = self.spnmaxtstep.value()   # if user selected a time step bigger than zero than thre may be discontinuous plots
             plottable2='y'
-            filter1 = str(self.Filter1_ComboBox_2.currentText())
+            filter1 = unicode(self.Filter1_ComboBox_2.currentText())
             filter1list = self.Filter1_QListWidget_2.selectedItems()
-            filter2 = str(self.Filter2_ComboBox_2.currentText())
+            filter2 = unicode(self.Filter2_ComboBox_2.currentText())
             filter2list= self.Filter2_QListWidget_2.selectedItems()
             nop =+ max(len(filter1list),1)*max(len(filter2list),1)
             self.p.extend([None]*nop)#list for plot objects
@@ -156,34 +155,34 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
                 if not (filter1 == '' or filter1==' ') and not (filter2== '' or filter2==' '):
                     for item1 in filter1list:
                         for item2 in filter2list:
-                            sql = r""" select """ + str(self.xcol2) + """, """ + str(self.ycol2) + """ from """ + str(self.table2) + """ where """ + filter1 + """='""" + str(item1.text())+ """' and """ + filter2 + """='""" + str(item2.text())+ """' order by """ + str(self.xcol2)
-                            self.plabels[i] = str(item1.text()) + """, """ + str(item2.text())
+                            sql = r""" select """ + unicode(self.xcol2) + """, """ + unicode(self.ycol2) + """ from """ + unicode(self.table2) + """ where """ + filter1 + """='""" + unicode(item1.text())+ """' and """ + filter2 + """='""" + unicode(item2.text())+ """' order by """ + unicode(self.xcol2)
+                            self.plabels[i] = unicode(item1.text()) + """, """ + unicode(item2.text())
                             self.createsingleplotobject(sql,i,My_format,curs,self.PlotType_comboBox_2.currentText())
                             i += 1
                 elif not (filter1 == '' or filter1==' '):
                     for item1 in filter1list:
-                        sql = r""" select """ + str(self.xcol2) + """, """ + str(self.ycol2) + """ from """ + str(self.table2) + """ where """ + filter1 + """='""" + str(item1.text())+ """' order by """ + str(self.xcol2)
-                        self.plabels[i] = str(item1.text()) 
+                        sql = r""" select """ + unicode(self.xcol2) + """, """ + unicode(self.ycol2) + """ from """ + unicode(self.table2) + """ where """ + filter1 + """='""" + unicode(item1.text())+ """' order by """ + unicode(self.xcol2)
+                        self.plabels[i] = unicode(item1.text()) 
                         self.createsingleplotobject(sql,i,My_format,curs,self.PlotType_comboBox_2.currentText())
                         i += 1
                 elif not (filter2 == '' or filter2==' '):
                     for item2 in filter2list:
-                        sql = r""" select """ + str(self.xcol2) + """, """ + str(self.ycol2) + """ from """ + str(self.table2) + """ where """ + filter2 + """='""" + str(item2.text())+ """' order by """ + str(self.xcol2)
-                        self.plabels[i] = str(item2.text())
+                        sql = r""" select """ + unicode(self.xcol2) + """, """ + unicode(self.ycol2) + """ from """ + unicode(self.table2) + """ where """ + filter2 + """='""" + unicode(item2.text())+ """' order by """ + unicode(self.xcol2)
+                        self.plabels[i] = unicode(item2.text())
                         self.createsingleplotobject(sql,i,My_format,curs,self.PlotType_comboBox_2.currentText())
                         i += 1            
                 else:
-                    sql = r""" select """ + str(self.xcol2) + """, """ + str(self.ycol2) + """ from """ + str(self.table2) + """ order by """ + str(self.xcol2)
-                    self.plabels[i] = str(self.ycol2)+""", """+str(self.table2)
+                    sql = r""" select """ + unicode(self.xcol2) + """, """ + unicode(self.ycol2) + """ from """ + unicode(self.table2) + """ order by """ + unicode(self.xcol2)
+                    self.plabels[i] = unicode(self.ycol2)+""", """+unicode(self.table2)
                     self.createsingleplotobject(sql,i,My_format,curs,self.PlotType_comboBox_2.currentText())
                     i += 1
             
         if not (self.table3 == '' or self.table3==' ') and not (self.xcol3== '' or self.xcol3==' ') and not (self.ycol3== '' or self.ycol3==' '):#if anything is to be plotted from tab 3
             self.maxtstep = self.spnmaxtstep.value()   # if user selected a time step bigger than zero than thre may be discontinuous plots
             plottable3='y'
-            filter1 = str(self.Filter1_ComboBox_3.currentText())
+            filter1 = unicode(self.Filter1_ComboBox_3.currentText())
             filter1list = self.Filter1_QListWidget_3.selectedItems()
-            filter2 = str(self.Filter2_ComboBox_3.currentText())
+            filter2 = unicode(self.Filter2_ComboBox_3.currentText())
             filter2list= self.Filter2_QListWidget_3.selectedItems()
             nop =+ max(len(filter1list),1)*max(len(filter2list),1)
             self.p.extend([None]*nop)#list for plot objects
@@ -192,25 +191,25 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
                 if not (filter1 == '' or filter1==' ') and not (filter2== '' or filter2==' '):
                     for item1 in filter1list:
                         for item2 in filter2list:
-                            sql = r""" select """ + str(self.xcol3) + """, """ + str(self.ycol3) + """ from """ + str(self.table3) + """ where """ + filter1 + """='""" + str(item1.text())+ """' and """ + filter2 + """='""" + str(item2.text())+ """' order by """ + str(self.xcol3)
-                            self.plabels[i] = str(item1.text()) + """, """ + str(item2.text())
+                            sql = r""" select """ + unicode(self.xcol3) + """, """ + unicode(self.ycol3) + """ from """ + unicode(self.table3) + """ where """ + filter1 + """='""" + unicode(item1.text())+ """' and """ + filter2 + """='""" + unicode(item2.text())+ """' order by """ + unicode(self.xcol3)
+                            self.plabels[i] = unicode(item1.text()) + """, """ + unicode(item2.text())
                             self.createsingleplotobject(sql,i,My_format,curs,self.PlotType_comboBox_3.currentText())
                             i += 1
                 elif not (filter1 == '' or filter1==' '):
                     for item1 in filter1list:
-                        sql = r""" select """ + str(self.xcol3) + """, """ + str(self.ycol3) + """ from """ + str(self.table3) + """ where """ + filter1 + """='""" + str(item1.text())+ """' order by """ + str(self.xcol3)
-                        self.plabels[i] = str(item1.text()) 
+                        sql = r""" select """ + unicode(self.xcol3) + """, """ + unicode(self.ycol3) + """ from """ + unicode(self.table3) + """ where """ + filter1 + """='""" + unicode(item1.text())+ """' order by """ + unicode(self.xcol3)
+                        self.plabels[i] = unicode(item1.text()) 
                         self.createsingleplotobject(sql,i,My_format,curs,self.PlotType_comboBox_3.currentText())
                         i += 1
                 elif not (filter2 == '' or filter2==' '):
                     for item2 in filter2list:
-                        sql = r""" select """ + str(self.xcol3) + """, """ + str(self.ycol3) + """ from """ + str(self.table3) + """ where """ + filter2 + """='""" + str(item2.text())+ """' order by """ + str(self.xcol3)
-                        self.plabels[i] = str(item2.text())
+                        sql = r""" select """ + unicode(self.xcol3) + """, """ + unicode(self.ycol3) + """ from """ + unicode(self.table3) + """ where """ + filter2 + """='""" + unicode(item2.text())+ """' order by """ + unicode(self.xcol3)
+                        self.plabels[i] = unicode(item2.text())
                         self.createsingleplotobject(sql,i,My_format,curs,self.PlotType_comboBox_3.currentText())
                         i += 1            
                 else:
-                    sql = r""" select """ + str(self.xcol3) + """, """ + str(self.ycol3) + """ from """ + str(self.table3) + """ order by """ + str(self.xcol3)
-                    self.plabels[i] = str(self.ycol3)+""", """+str(self.table3)
+                    sql = r""" select """ + unicode(self.xcol3) + """, """ + unicode(self.ycol3) + """ from """ + unicode(self.table3) + """ order by """ + unicode(self.xcol3)
+                    self.plabels[i] = unicode(self.ycol3)+""", """+unicode(self.table3)
                     self.createsingleplotobject(sql,i,My_format,curs,self.PlotType_comboBox_3.currentText())
                     i += 1
 
@@ -222,36 +221,61 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
     def createsingleplotobject(self,sql,i,My_format,curs,plottype='line'):
         rs = curs.execute(sql) #Send SQL-syntax to cursor
         recs = rs.fetchall()  # All data are stored in recs
+        # late fix for xy-plots
+        My_format2 = [('numx', float), ('values', float)]#define a format for xy-plot (to use if not datetime on x-axis)
         #Transform data to a numpy.recarray
-        table = np.array(recs, dtype=My_format)  #NDARRAY
-        table2=table.view(np.recarray)   # RECARRAY transform the 2 cols into callable objects
-        myTimestring = []  #LIST
-        j = 0
-        for row in table2:
-            myTimestring.append(table2.date_time[j])
-            j = j + 1
-        numtime=datestr2num(myTimestring)  #conv list of strings to numpy.ndarray of floats
-        
+        try:
+            table = np.array(recs, dtype=My_format)  #NDARRAY
+            table2=table.view(np.recarray)   # RECARRAY transform the 2 cols into callable objects
+            myTimestring = []  #LIST
+            FlagTimeXY = 'time'
+            j = 0
+            for row in table2: 
+                myTimestring.append(table2.date_time[j])
+                j = j + 1
+            numtime=datestr2num(myTimestring)  #conv list of strings to numpy.ndarray of floats
+        except:
+            table = np.array(recs, dtype=My_format2)  #NDARRAY
+            table2=table.view(np.recarray)   # RECARRAY transform the 2 cols into callable objects
+            myXYstring = []  #LIST
+            FlagTimeXY = 'XY'
+            j = 0
+            for row in table2: #
+                myXYstring.append(table2.numx[j])
+                j = j + 1
+            numtime = myXYstring
+
         # from version 0.2 there is a possibility to make discontinuous plot if timestep bigger than maxtstep
         if self.maxtstep > 0: # if user selected a time step bigger than zero than thre may be discontinuous plots
             pos = np.where(np.abs(np.diff(numtime)) >= self.maxtstep)[0]
             numtime[pos] = np.nan
             table2.values[pos] = np.nan
-        
+
         if plottype == "marker":
-                self.p[i], = self.axes.plot_date(numtime, table2.values,  'o',label=self.plabels[i])  
+            MarkVar = 'o'  
         elif plottype  == "line":
-                self.p[i], = self.axes.plot_date(numtime, table2.values,  '-',label=self.plabels[i])  
+            MarkVar = '-'  
         elif plottype  == "line and cross":
-                self.p[i], = self.axes.plot_date(numtime, table2.values,  '+-', markersize = 6,label=self.plabels[i])  
-        elif plottype  == "line and marker":
-                self.p[i], = self.axes.plot_date(numtime, table2.values,  'o-',label=self.plabels[i])  
-        elif plottype  == "step-pre":
-                self.p[i], = self.axes.plot_date(numtime, table2.values, drawstyle='steps-pre', linestyle='-', marker='None',label=self.plabels[i]) # 'steps-pre' best for precipitation and flowmeters, optional types are 'steps', 'steps-mid', 'steps-post'  
-        elif plottype  == "step-post":
-                self.p[i], = self.axes.plot_date(numtime, table2.values, drawstyle='steps-post', linestyle='-', marker='None',label=self.plabels[i]) # 'steps-pre' best for precipitation and flowmeters, optional types are 'steps', 'steps-mid', 'steps-post'  
-        else:   #LINES WITH DOTS IS DEFAULT
-                self.p[i], = self.axes.plot_date(numtime, table2.values,  'o-',label=self.plabels[i])
+            MarkVar = '+-'  
+        else:
+            MarkVar = 'o-'  
+
+        if FlagTimeXY == "time" and plottype == "step-pre":
+            self.p[i], = self.axes.plot_date(numtime, table2.values, drawstyle='steps-pre', linestyle='-', marker='None',label=self.plabels[i])# 'steps-pre' best for precipitation and flowmeters, optional types are 'steps', 'steps-mid', 'steps-post'  
+        elif FlagTimeXY == "time" and plottype == "step-post":
+            self.p[i], = self.axes.plot_date(numtime, table2.values, drawstyle='steps-post', linestyle='-', marker='None',label=self.plabels[i])
+        elif FlagTimeXY == "time" and plottype == "line and cross":
+            self.p[i], = self.axes.plot_date(numtime, table2.values,  MarkVar,markersize = 6, label=self.plabels[i])
+        elif FlagTimeXY == "time":
+            self.p[i], = self.axes.plot_date(numtime, table2.values,  MarkVar,label=self.plabels[i])
+        elif FlagTimeXY == "XY" and plottype == "step-pre":
+            self.p[i], = self.axes.plot(numtime, table2.values, drawstyle='steps-pre', linestyle='-', marker='None',label=self.plabels[i]) 
+        elif FlagTimeXY == "XY" and plottype == "step-post":
+            self.p[i], = self.axes.plot(numtime, table2.values, drawstyle='steps-post', linestyle='-', marker='None',label=self.plabels[i]) 
+        elif FlagTimeXY == "XY" and plottype == "line and cross":
+            self.p[i], = self.axes.plot(numtime, table2.values,  MarkVar,markersize = 6, label=self.plabels[i])
+        else: 
+            self.p[i], = self.axes.plot(numtime, table2.values,  MarkVar,label=self.plabels[i]) 
                 
     def refreshPlot( self ):
         self.axes.legend_=None
@@ -314,9 +338,37 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
             for i in range (1,3):
                 self.clearthings(1)
 
-            conn = sqlite.connect( str(self.database) )
+            conn = sqlite.connect( unicode(self.database) )
             cursor = conn.cursor()
-            rs=cursor.execute(r"""SELECT tbl_name FROM sqlite_master WHERE (type='table' or type='view') and not (name = 'geom_cols_ref_sys' or name = 'geometry_columns' or name = 'geometry_columns_auth' or name = 'spatial_ref_sys' or name = 'spatialite_history' or name = 'sqlite_sequence' or name = 'sqlite_stat1' or name = 'views_geometry_columns' or name = 'virts_geometry_columns') ORDER BY tbl_name""" )  #SQL statement to get the relevant tables in the spatialite database
+            rs=cursor.execute(r"""SELECT tbl_name FROM sqlite_master WHERE (type='table' or type='view') and not (name in('geom_cols_ref_sys',
+                'geometry_columns',
+                'geometry_columns_time',
+                'spatial_ref_sys',
+                'spatialite_history',
+                'vector_layers',
+                'views_geometry_columns',
+                'virts_geometry_columns',
+                'geometry_columns_auth',
+                'geometry_columns_fields_infos',
+                'geometry_columns_statistics',
+                'sql_statements_log',
+                'layer_statistics',
+                'sqlite_sequence',
+                'sqlite_stat1' ,
+                'views_layer_statistics',
+                'virts_layer_statistics',
+                'vector_layers_auth',
+                'vector_layers_field_infos',
+                'vector_layers_statistics',
+                'views_geometry_columns_auth',
+                'views_geometry_columns_field_infos',
+                'views_geometry_columns_statistics',
+                'virts_geometry_columns_auth',
+                'virts_geometry_columns_field_infos',
+                'virts_geometry_columns_statistics' ,
+                'geometry_columns',
+                'spatialindex',
+                'SpatialIndex')) ORDER BY tbl_name"""  )  #SQL statement to get the relevant tables in the spatialite database
             #self.dbTables = {} 
             self.table_ComboBox_1.addItem('')
             self.table_ComboBox_2.addItem('')
@@ -343,16 +395,11 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
         getattr(self,filter2combobox).clear()
         getattr(self,filter1qlistwidget).clear()
         getattr(self,filter2qlistwidget).clear()
-        #self.ycol_ComboBox_1.clear()
-        #self.Filter1_ComboBox_1.clear() 
-        #self.Filter2_ComboBox_1.clear() 
-        #self.Filter1_QListWidget_1.clear()
-        #self.Filter2_QListWidget_1.clear()
 
     def Table1Changed(self):     #This method is called whenever table1 is changed
         # First, update combobox with columns
         self.clearthings(1)
-        self.table1 = str(self.table_ComboBox_1.currentText())
+        self.table1 = unicode(self.table_ComboBox_1.currentText())
         self.PopulateComboBox('xcol_ComboBox_1', self.table_ComboBox_1.currentText())  # GeneralNote: For some reason it is not possible to send currentText with the SIGNAL-trigger
         self.PopulateComboBox('ycol_ComboBox_1', self.table_ComboBox_1.currentText())  # See GeneralNote
         self.PopulateComboBox('Filter1_ComboBox_1', self.table_ComboBox_1.currentText())  # See GeneralNote
@@ -361,7 +408,7 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
     def Table2Changed(self):     #This method is called whenever table2 is changed
         # First, update combobox with columns
         self.clearthings(2)
-        self.table2 = str(self.table_ComboBox_2.currentText())
+        self.table2 = unicode(self.table_ComboBox_2.currentText())
         self.PopulateComboBox('xcol_ComboBox_2', self.table_ComboBox_2.currentText())  # GeneralNote: For some reason it is not possible to send currentText with the SIGNAL-trigger
         self.PopulateComboBox('ycol_ComboBox_2', self.table_ComboBox_2.currentText())  # See GeneralNote
         self.PopulateComboBox('Filter1_ComboBox_2', self.table_ComboBox_2.currentText())  # See GeneralNote
@@ -370,14 +417,13 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
     def Table3Changed(self):     #This method is called whenever table3 is changed
         # First, update combobox with columns
         self.clearthings(3)
-        self.table3 = str(self.table_ComboBox_3.currentText())
+        self.table3 = unicode(self.table_ComboBox_3.currentText())
         self.PopulateComboBox('xcol_ComboBox_3', self.table_ComboBox_3.currentText())  # GeneralNote: For some reason it is not possible to send currentText with the SIGNAL-trigger
         self.PopulateComboBox('ycol_ComboBox_3', self.table_ComboBox_3.currentText())  # See GeneralNote
         self.PopulateComboBox('Filter1_ComboBox_3', self.table_ComboBox_3.currentText())  # See GeneralNote
         self.PopulateComboBox('Filter2_ComboBox_3', self.table_ComboBox_3.currentText())  # See GeneralNote
 
     def PopulateComboBox(self, comboboxname='', table=None):
-        #print str(getattr(self, comboboxname))    # debug
         """This method fills comboboxes with columns for selected tool and table"""
         columns = self.LoadColumnsFromTable(table)    # Load all columns into a list 'columns'
         if len(columns)>0:    # Transfer information from list 'columns' to the combobox
@@ -388,15 +434,12 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
     def LoadColumnsFromTable(self, table=''):
         """ This method returns a list with all the columns in the table"""
         if len(table)>0 and len(self.database)>0:            # Should not be needed since the function never should be called without existing table...
-            #QMessageBox.information(None, "info", "now going for columns in table "+  str(table))    # DEBUGGING
-            conn = sqlite.connect(str(self.database))  
+            conn = sqlite.connect(unicode(self.database))  
             curs = conn.cursor()
-            #sql = r"""PRAGMA table_info('"""  + str(self.Table) + """')""" #Did not really work as expected
             sql = r"""SELECT * FROM '"""
-            sql += str(table)
+            sql += unicode(table)
             sql += """'"""     
-            sql2 = str(sql).encode(locale.getdefaultlocale()[1])  #To get back to uniciode-string
-            rs = curs.execute(sql2)  #Send the SQL statement to get the columns in the table            
+            rs = curs.execute(sql)  #Send the SQL statement to get the columns in the table            
             columns = {} 
             columns = [tuple[0] for tuple in curs.description]
             rs.close()
@@ -439,12 +482,10 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
             self.PopulateFilterList(self.table3,'Filter2_QListWidget_3', self.Filter2_ComboBox_3.currentText())
                         
     def PopulateFilterList(self, table, QListWidgetname='', filtercolumn=None):
-        sql = "select distinct " + str(filtercolumn) + " from " + table
+        sql = "select distinct " + unicode(filtercolumn) + " from " + table + " order by " + unicode(filtercolumn)
         list_data=sql_load_fr_db(self.database, sql)
         for post in list_data:
-            item = QtGui.QListWidgetItem(str(post[0]).encode(locale.getdefaultlocale()[1]))  #.encode due to terrible encoding issues in the db!!!!
-            #item = QtGui.QListWidgetItem(str(post[0]).encode('cp1252'))
-            #item = QtGui.QListWidgetItem(str(post[0]))
+            item = QtGui.QListWidgetItem(unicode(post[0]))
             getattr(self, QListWidgetname).addItem(item)
 
     def storesettings(self):
@@ -469,7 +510,6 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
         self.ycol3=self.ycol_ComboBox_3.currentText()
 
     def readsettings(self): #only used when application starts, to load default values from last run
-        #if len(str(self.settings.value('db',type='QString')))>0:
         if len((self.settings.value('db')).toString())>0:
             self.database = self.settings.value('db',type='QString')
             #print self.database
@@ -599,18 +639,17 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
                 print 'nothing to be done for table3'
                 
     def about(self):
-        version = '0.2'
-        contact = 'groundwatergis@gmail.com'
-        web = 'http://sourceforge.net/projects/plotsqlite'
+        version = u'0.2.3'
+        contact = u'groundwatergis@gmail.com'
+        web = u'http://sourceforge.net/projects/plotsqlite'
         TEXT = 'This is PlotSQLite - the Midvatten plot generator.\n\nVersion: ' + version + '\nContact: ' + contact + '\nMore info: ' + web 
-        QtGui.QMessageBox.information(None, "info", TEXT.encode('utf-8')) 
+        QtGui.QMessageBox.information(None, "info", TEXT) 
         
                 
 def sql_load_fr_db(dbpath, sql=''):
-    conn = sqlite.connect(str(dbpath),detect_types=sqlite.PARSE_DECLTYPES|sqlite.PARSE_COLNAMES)
+    conn = sqlite.connect(unicode(dbpath),detect_types=sqlite.PARSE_DECLTYPES|sqlite.PARSE_COLNAMES)
     curs = conn.cursor()
-    sql2 = str(sql).encode('utf-8') 
-    resultfromsql = curs.execute(sql2) #Send SQL-syntax to cursor
+    resultfromsql = curs.execute(unicode(sql)) #Send SQL-syntax to cursor
     result = resultfromsql.fetchall()
     resultfromsql.close()
     conn.close()
