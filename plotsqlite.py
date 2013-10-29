@@ -450,35 +450,33 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
         return columns        # This method returns a list with all the columns in the table
 
     def Filter1_1Changed(self):
-        # First, update combobox with columns
+        self.Filter1_QListWidget_1.clear()
         if not self.Filter1_ComboBox_1.currentText()=='':
-            self.Filter1_QListWidget_1.clear()
             self.PopulateFilterList(self.table1,'Filter1_QListWidget_1', self.Filter1_ComboBox_1.currentText())  # For some reason it is not possible to send currentText with the SIGNAL-trigger
         
     def Filter2_1Changed(self):
-        # First, update combobox with columns
+        self.Filter2_QListWidget_1.clear()
         if not self.Filter2_ComboBox_1.currentText()=='':
-            self.Filter2_QListWidget_1.clear()
             self.PopulateFilterList(self.table1,'Filter2_QListWidget_1', self.Filter2_ComboBox_1.currentText())  # For some reason it is not possible to send currentText with the SIGNAL-trigger
 
     def Filter1_2Changed(self):
+        self.Filter1_QListWidget_2.clear()
         if not self.Filter1_ComboBox_2.currentText()=='':
-            self.Filter1_QListWidget_2.clear()
             self.PopulateFilterList(self.table2,'Filter1_QListWidget_2', self.Filter1_ComboBox_2.currentText())  
-        
+            
     def Filter2_2Changed(self):
+        self.Filter2_QListWidget_2.clear()
         if not self.Filter2_ComboBox_2.currentText()=='':
-            self.Filter2_QListWidget_2.clear()
             self.PopulateFilterList(self.table2,'Filter2_QListWidget_2', self.Filter2_ComboBox_2.currentText())
 
     def Filter1_3Changed(self):
+        self.Filter1_QListWidget_3.clear()
         if not self.Filter1_ComboBox_3.currentText()=='':
-            self.Filter1_QListWidget_3.clear()
-            self.PopulateFilterList(self.table3,'Filter1_QListWidget_3', self.Filter1_ComboBox_3.currentText())  
+            self.PopulateFilterList(self.table3,'Filter1_QListWidget_3', self.Filter1_ComboBox_3.currentText())
         
     def Filter2_3Changed(self):
+        self.Filter2_QListWidget_3.clear()
         if not self.Filter2_ComboBox_3.currentText()=='':
-            self.Filter2_QListWidget_3.clear()
             self.PopulateFilterList(self.table3,'Filter2_QListWidget_3', self.Filter2_ComboBox_3.currentText())
                         
     def PopulateFilterList(self, table, QListWidgetname='', filtercolumn=None):
@@ -639,7 +637,7 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
                 print 'nothing to be done for table3'
                 
     def about(self):
-        version = u'0.2.3'
+        version = u'0.2.4'
         contact = u'groundwatergis@gmail.com'
         web = u'http://sourceforge.net/projects/plotsqlite'
         TEXT = 'This is PlotSQLite - the Midvatten plot generator.\n\nVersion: ' + version + '\nContact: ' + contact + '\nMore info: ' + web 
