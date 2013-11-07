@@ -7,6 +7,15 @@ Date                 : 2012-12-03
 Author               : Josef Källgården
 email                : groundwatergis@gmail.com 
  ***************************************************************************/
+ CHANGELOG:
+ v0.2.4 - new build due to a PyInstaller bug (http://www.pyinstaller.org/ticket/783)
+ v0.2.3 - added xy scatter plot support, fixed tab order
+ v0.2.2 - sorting of filters
+ v0.2.1 - encoding cleanupexcluded default splite tables from being listed
+ v0.2 - discontinuous plot
+ v0.x - early pre-alpha release
+ 
+ 
 """
 # Import the sys, os, locale and PyQt libraries
 import sys, os, locale
