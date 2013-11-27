@@ -8,6 +8,7 @@ Author               : Josef Källgården
 email                : groundwatergis@gmail.com 
  ***************************************************************************/
  CHANGELOG:
+ v0.2.5 - updating due to new Qt API (by QGIS)
  v0.2.4 - new build due to a PyInstaller bug (http://www.pyinstaller.org/ticket/783)
  v0.2.3 - added xy scatter plot support, fixed tab order
  v0.2.2 - sorting of filters
@@ -517,7 +518,11 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
         self.ycol3=self.ycol_ComboBox_3.currentText()
 
     def readsettings(self): #only used when application starts, to load default values from last run
-        if len((self.settings.value('db')).toString())>0:
+        try:
+            l1 = len((self.settings.value('db')).toString())
+        except:
+            l1 = len(str(self.settings.value('db')))
+        if l1>0:
             self.database = self.settings.value('db',type='QString')
             #print self.database
             self.openDBFile()
@@ -662,12 +667,21 @@ def sql_load_fr_db(dbpath, sql=''):
     conn.close()
     return result
      
-def main():
+def main(): #when this script is run directly or from python interpreter outside qgis
     app=QtGui.QApplication.instance() # checks if QApplication already exists 
     if not app: # create QApplication if it doesnt exist 
         app = QtGui.QApplication(sys.argv)     
         MainWindow()
     sys.exit(app.exec_())#comment out when using Ipython
 
-if __name__ == "__main__":
+if __name__ == "__main__":  #if this script is run directly
     main()
+
+class App(QtGui.QApplication): #call this from qgis python console
+    def __init__(self, args):
+        QtGui.QApplication.__init__(self,args)
+        self.window = MainWindow()
+
+    def show(self):
+        self.window.show()
+        sys.exit(self.exec_())
