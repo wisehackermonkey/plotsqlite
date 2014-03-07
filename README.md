@@ -2,7 +2,11 @@
 
 This application can be used to to create time series and xy plots from data stored in a sqlite database.
 
-The application may be downloaded from here. Then unzip the whole folder close to root (i.e. not in 'Program Files..') and launch plotsqlite.exe.
+##Windows users
+Download [latest zip file from here] (https://drive.google.com/folderview?id=0B1vhrFUx2OZBVUpFRm92bFZ5R2c&usp=sharing), unzip whole folder close to root (i.e. not in 'Program Files..') and launch plotsqlite.exe.
+
+##Linux users
+Clone this repo and run plotsqlite.py
 
 * To create time series plots, tables in the database must have one column with date and time on format 'yyyy-mm-dd hh:mm:ss' (or truncated) to be plotted on x-axis and a numeric column to be plotted on y-axis. Additional columns may be used for filtering and/or other plots.
 * To create xy scatter plots, tables in the database just needs two numerical columns.
@@ -10,7 +14,7 @@ The application may be downloaded from here. Then unzip the whole folder close t
 
 #PlotSQLite basics
 
-PlotSQLite is an application for creating 2D-plots (primarily time series but also xy scatter) from data stored in a sqlite databse. The application is closely related to Midvatten plugin för QGIS and is meant to be a supplement with better layout options including headers, scaling legend position etc. See screen dump:
+PlotSQLite is an application for creating 2D-plots (primarily time series but also xy scatter) from data stored in a sqlite databse. The application is closely related to [Midvatten plugin for QGIS](https://sites.google.com/site/midvattenpluginforqgis/) and is meant to be a supplement with better layout options including headers, scaling legend position etc. [See screen dump]([http://wiki.plotsqlite.googlecode.com/git-history/master/Screenshot%20from%202013-01-15%20212016.png]).
 
 The application is early alpha stage but still useful. Download [latest zip file from here] (https://drive.google.com/folderview?id=0B1vhrFUx2OZBVUpFRm92bFZ5R2c&usp=sharing), unzip whole folder close to root (i.e. not in 'Program Files..') and launch plotsqlite.exe. Please maximize the window for best resolution.
 
