@@ -140,7 +140,7 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
                 elif not (filter1 == '' or filter1==' '):
                     for item1 in filter1list:
                         sql = r""" select """ + np.unicode(self.xcol_ComboBox_1.currentText()) + """, """ + np.unicode(self.ycol_ComboBox_1.currentText()) + """ from """ + np.unicode(self.table_ComboBox_1.currentText()) + """ where """ + filter1 + """='""" + np.unicode(item1.text())+ """' order by """ + np.unicode(self.xcol_ComboBox_1.currentText())
-                        self.plabels[i] = np.unicode(item1.text()) 
+                        self.plabels[i] = np.unicode(item1.text())
                         self.createsingleplotobject(sql,i,My_format,curs,self.PlotType_comboBox_1.currentText())
                         i += 1
                 elif not (filter2 == '' or filter2==' '):
@@ -148,7 +148,7 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
                         sql = r""" select """ + np.unicode(self.xcol_ComboBox_1.currentText()) + """, """ + np.unicode(self.ycol_ComboBox_1.currentText()) + """ from """ + np.unicode(self.table_ComboBox_1.currentText()) + """ where """ + filter2 + """='""" + np.unicode(item2.text())+ """' order by """ + np.unicode(self.xcol_ComboBox_1.currentText())
                         self.plabels[i] = np.unicode(item2.text())
                         self.createsingleplotobject(sql,i,My_format,curs,self.PlotType_comboBox_1.currentText())
-                        i += 1            
+                        i += 1
                 else:
                     sql = r""" select """ + np.unicode(self.xcol_ComboBox_1.currentText()) + """, """ + np.unicode(self.ycol_ComboBox_1.currentText()) + """ from """ + np.unicode(self.table_ComboBox_1.currentText()) + """ order by """ + np.unicode(self.xcol_ComboBox_1.currentText())
                     self.plabels[i] = np.unicode(self.ycol_ComboBox_1.currentText())+""", """+np.unicode(self.table_ComboBox_1.currentText())
@@ -176,7 +176,7 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
                 elif not (filter1 == '' or filter1==' '):
                     for item1 in filter1list:
                         sql = r""" select """ + np.unicode(self.xcol2) + """, """ + np.unicode(self.ycol2) + """ from """ + np.unicode(self.table2) + """ where """ + filter1 + """='""" + np.unicode(item1.text())+ """' order by """ + np.unicode(self.xcol2)
-                        self.plabels[i] = np.unicode(item1.text()) 
+                        self.plabels[i] = np.unicode(item1.text())
                         self.createsingleplotobject(sql,i,My_format,curs,self.PlotType_comboBox_2.currentText())
                         i += 1
                 elif not (filter2 == '' or filter2==' '):
@@ -184,13 +184,13 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
                         sql = r""" select """ + np.unicode(self.xcol2) + """, """ + np.unicode(self.ycol2) + """ from """ + np.unicode(self.table2) + """ where """ + filter2 + """='""" + np.unicode(item2.text())+ """' order by """ + np.unicode(self.xcol2)
                         self.plabels[i] = np.unicode(item2.text())
                         self.createsingleplotobject(sql,i,My_format,curs,self.PlotType_comboBox_2.currentText())
-                        i += 1            
+                        i += 1
                 else:
                     sql = r""" select """ + np.unicode(self.xcol2) + """, """ + np.unicode(self.ycol2) + """ from """ + np.unicode(self.table2) + """ order by """ + np.unicode(self.xcol2)
                     self.plabels[i] = np.unicode(self.ycol2)+""", """+np.unicode(self.table2)
                     self.createsingleplotobject(sql,i,My_format,curs,self.PlotType_comboBox_2.currentText())
                     i += 1
-            
+
         if not (self.table3 == '' or self.table3==' ') and not (self.xcol3== '' or self.xcol3==' ') and not (self.ycol3== '' or self.ycol3==' '):#if anything is to be plotted from tab 3
             self.maxtstep = self.spnmaxtstep.value()   # if user selected a time step bigger than zero than thre may be discontinuous plots
             plottable3='y'
@@ -212,7 +212,7 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
                 elif not (filter1 == '' or filter1==' '):
                     for item1 in filter1list:
                         sql = r""" select """ + np.unicode(self.xcol3) + """, """ + np.unicode(self.ycol3) + """ from """ + np.unicode(self.table3) + """ where """ + filter1 + """='""" + np.unicode(item1.text())+ """' order by """ + np.unicode(self.xcol3)
-                        self.plabels[i] = np.unicode(item1.text()) 
+                        self.plabels[i] = np.unicode(item1.text())
                         self.createsingleplotobject(sql,i,My_format,curs,self.PlotType_comboBox_3.currentText())
                         i += 1
                 elif not (filter2 == '' or filter2==' '):
@@ -220,7 +220,7 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
                         sql = r""" select """ + np.unicode(self.xcol3) + """, """ + np.unicode(self.ycol3) + """ from """ + np.unicode(self.table3) + """ where """ + filter2 + """='""" + np.unicode(item2.text())+ """' order by """ + np.unicode(self.xcol3)
                         self.plabels[i] = np.unicode(item2.text())
                         self.createsingleplotobject(sql,i,My_format,curs,self.PlotType_comboBox_3.currentText())
-                        i += 1            
+                        i += 1
                 else:
                     sql = r""" select """ + np.unicode(self.xcol3) + """, """ + np.unicode(self.ycol3) + """ from """ + np.unicode(self.table3) + """ order by """ + np.unicode(self.xcol3)
                     self.plabels[i] = np.unicode(self.ycol3)+""", """+np.unicode(self.table3)
@@ -244,7 +244,7 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
             myTimestring = []  #LIST
             FlagTimeXY = 'time'
             j = 0
-            for row in table2: 
+            for row in table2:
                 myTimestring.append(table2.date_time[j])
                 j = j + 1
             numtime=datestr2num(myTimestring)  #conv list of strings to numpy.ndarray of floats
@@ -266,16 +266,16 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
             table2.values[pos] = np.nan
 
         if plottype == "marker":
-            MarkVar = 'o'  
+            MarkVar = 'o'
         elif plottype  == "line":
-            MarkVar = '-'  
+            MarkVar = '-'
         elif plottype  == "line and cross":
-            MarkVar = '+-'  
+            MarkVar = '+-'
         else:
-            MarkVar = 'o-'  
+            MarkVar = 'o-'
 
         if FlagTimeXY == "time" and plottype == "step-pre":
-            self.p[i], = self.axes.plot_date(numtime, table2.values, drawstyle='steps-pre', linestyle='-', marker='None',c=np.random.rand(3,1),label=self.plabels[i])# 'steps-pre' best for precipitation and flowmeters, optional types are 'steps', 'steps-mid', 'steps-post'  
+            self.p[i], = self.axes.plot_date(numtime, table2.values, drawstyle='steps-pre', linestyle='-', marker='None',c=np.random.rand(3,1),label=self.plabels[i])# 'steps-pre' best for precipitation and flowmeters, optional types are 'steps', 'steps-mid', 'steps-post'
         elif FlagTimeXY == "time" and plottype == "step-post":
             self.p[i], = self.axes.plot_date(numtime, table2.values, drawstyle='steps-post', linestyle='-', marker='None',c=np.random.rand(3,1),label=self.plabels[i])
         elif FlagTimeXY == "time" and plottype == "line and cross":
@@ -283,14 +283,14 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
         elif FlagTimeXY == "time":
             self.p[i], = self.axes.plot_date(numtime, table2.values,  MarkVar,label=self.plabels[i])
         elif FlagTimeXY == "XY" and plottype == "step-pre":
-            self.p[i], = self.axes.plot(numtime, table2.values, drawstyle='steps-pre', linestyle='-', marker='None',label=self.plabels[i]) 
+            self.p[i], = self.axes.plot(numtime, table2.values, drawstyle='steps-pre', linestyle='-', marker='None',label=self.plabels[i])
         elif FlagTimeXY == "XY" and plottype == "step-post":
-            self.p[i], = self.axes.plot(numtime, table2.values, drawstyle='steps-post', linestyle='-', marker='None',label=self.plabels[i]) 
+            self.p[i], = self.axes.plot(numtime, table2.values, drawstyle='steps-post', linestyle='-', marker='None',label=self.plabels[i])
         elif FlagTimeXY == "XY" and plottype == "line and cross":
             self.p[i], = self.axes.plot(numtime, table2.values,  MarkVar,markersize = 6, label=self.plabels[i])
-        else: 
-            self.p[i], = self.axes.plot(numtime, table2.values,  MarkVar,label=self.plabels[i]) 
-                
+        else:
+            self.p[i], = self.axes.plot(numtime, table2.values,  MarkVar,label=self.plabels[i])
+
     def refreshPlot( self ):
         self.axes.legend_=None
         #self.axes.clear()
@@ -338,8 +338,12 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
         self.canvas.draw()
 
     def selectFile(self):   #Open a dialog to locate the sqlite file and some more...
-
-        path = QtGui.QFileDialog.getOpenFileName(None,str("Select database:"),"*.sqlite")
+        try:
+            from PyQt4.QtCore import QString
+            message=QtCore.QString.fromLocal8Bit("Select database:")
+        except ImportError:
+            message = str("Select database:")
+        path = QtGui.QFileDialog.getOpenFileName(None,message,"*.sqlite")
         if path:
             self.database = path # To make possible cancel the FileDialog and continue loading a predefined db
         self.openDBFile()
@@ -654,15 +658,15 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
                     i = i + 1
             except:
                 print('nothing to be done for table3')
-                
+
     def about(self):
         version = u'0.2.4'
         contact = u'groundwatergis@gmail.com'
         web = u'http://sourceforge.net/projects/plotsqlite'
-        TEXT = 'This is PlotSQLite - the Midvatten plot generator.\n\nVersion: ' + version + '\nContact: ' + contact + '\nMore info: ' + web 
-        QtGui.QMessageBox.information(None, "info", TEXT) 
-        
-                
+        TEXT = 'This is PlotSQLite - the Midvatten plot generator.\n\nVersion: ' + version + '\nContact: ' + contact + '\nMore info: ' + web
+        QtGui.QMessageBox.information(None, "info", TEXT)
+
+
 def sql_load_fr_db(dbpath, sql=''):
     conn = sqlite.connect(np.unicode(dbpath),detect_types=sqlite.PARSE_DECLTYPES|sqlite.PARSE_COLNAMES)
     curs = conn.cursor()
