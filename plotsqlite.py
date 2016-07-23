@@ -8,6 +8,7 @@ Author               : Josef Källgården
 email                : groundwatergis@gmail.com 
  ***************************************************************************/
  CHANGELOG:
+ v0.2.6 - random step plot colors
  v0.2.5 - updating due to new Qt API (by QGIS)
  v0.2.4 - new build due to a PyInstaller bug (http://www.pyinstaller.org/ticket/783)
  v0.2.3 - added xy scatter plot support, fixed tab order
@@ -15,17 +16,13 @@ email                : groundwatergis@gmail.com
  v0.2.1 - encoding cleanupexcluded default splite tables from being listed
  v0.2 - discontinuous plot
  v0.x - early pre-alpha release
- 
- 
 """
-# Import the sys, os, locale and PyQt libraries
 import sys, os, locale
 from PyQt4 import QtGui, QtCore#, uic, QtSql
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 from functools import partial # only to get combobox signals to work
 
-# 
 from sqlite3 import dbapi2 as sqlite
 import numpy as np
 import matplotlib.pyplot as plt   
@@ -35,7 +32,6 @@ from matplotlib.backends.backend_qt4agg import NavigationToolbar2QTAgg as Naviga
 import datetime
 import matplotlib.ticker as tick
 from PlotSQLite_MainWindow import Ui_MainWindow
-from configobj import ConfigObj
 
 
 class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
@@ -279,9 +275,9 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
         elif FlagTimeXY == "time":
             self.p[i], = self.axes.plot_date(numtime, table2.values,  MarkVar,label=self.plabels[i])
         elif FlagTimeXY == "XY" and plottype == "step-pre":
-            self.p[i], = self.axes.plot(numtime, table2.values, drawstyle='steps-pre', linestyle='-', marker='None',label=self.plabels[i]) 
+            self.p[i], = self.axes.plot(numtime, table2.values, drawstyle='steps-pre', linestyle='-', marker='None',c=np.random.rand(3,1),label=self.plabels[i]) 
         elif FlagTimeXY == "XY" and plottype == "step-post":
-            self.p[i], = self.axes.plot(numtime, table2.values, drawstyle='steps-post', linestyle='-', marker='None',label=self.plabels[i]) 
+            self.p[i], = self.axes.plot(numtime, table2.values, drawstyle='steps-post', linestyle='-', marker='None',c=np.random.rand(3,1),abel=self.plabels[i]) 
         elif FlagTimeXY == "XY" and plottype == "line and cross":
             self.p[i], = self.axes.plot(numtime, table2.values,  MarkVar,markersize = 6, label=self.plabels[i])
         else: 

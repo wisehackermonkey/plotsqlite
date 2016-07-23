@@ -2,6 +2,8 @@
 
 This application can be used to to create time series and xy plots from data stored in a sqlite database. The application is closely related to [Midvatten plugin for QGIS](https://sites.google.com/site/midvattenpluginforqgis/) and is meant to be a supplement with better layout options including headers, scaling legend position etc. [See screen dump]([http://wiki.plotsqlite.googlecode.com/git-history/master/Screenshot%20from%202013-01-15%20212016.png]).
 
+Please notice that plotsqlite is not under active development why there may be bugfixes and features implemented into the midvatten plugin custom plot that are not included in plotsqlite.
+
 ##Windows users
 Download [latest zip file from here] (https://drive.google.com/folderview?id=0B1vhrFUx2OZBVUpFRm92bFZ5R2c&usp=sharing), unzip whole folder close to root (i.e. not in 'Program Files..') and launch plotsqlite.exe.
 
