@@ -1,16 +1,16 @@
-#Introduction
+# Introduction
 
 This application can be used to to create time series and xy plots from data stored in a sqlite database. The application is closely related to [Midvatten plugin for QGIS](https://sites.google.com/site/midvattenpluginforqgis/) and is meant to be a supplement with better layout options including headers, scaling legend position etc. [See screen dump]([http://wiki.plotsqlite.googlecode.com/git-history/master/Screenshot%20from%202013-01-15%20212016.png]).
 
 Please notice that plotsqlite is not under active development why there may be bugfixes and features implemented into the midvatten plugin custom plot that are not included in plotsqlite.
 
-##Windows users
+## Windows users
 Download [latest zip file from here] (https://drive.google.com/folderview?id=0B1vhrFUx2OZBVUpFRm92bFZ5R2c&usp=sharing), unzip whole folder close to root (i.e. not in 'Program Files..') and launch plotsqlite.exe.
 
-##Linux users
+## Linux users
 Clone this repo and run plotsqlite.py
 
-#PlotSQLite basics
+# PlotSQLite basics
 
 PlotSQLite is an application for creating 2D-plots (primarily time series but also xy scatter) from data stored in a sqlite databse.
 
@@ -22,8 +22,8 @@ The application is early alpha stage but still useful. Download [latest zip file
 Note, earlier I made single-file executables but due to a bug in PyInstaller? this is not possible at the moment. I will revert to this as soon as the bug is fixed.
 
 If you are upgrading from an earlier version of plotsqlite, delete ALL old files and replace with the content in latest zip.
-#Usage
-##Left part of the main window
+# Usage
+## Left part of the main window
 
 A. Select database and then, to enable simultaneous plot from up to three different tables, set the following in tabs 1-3:
 
@@ -34,7 +34,7 @@ C. If using a Midvatten db (from Midvatten plugin for QGIS or perhaps sample dat
 D. Select plot type, e.g. "line and marker"
 
 E. Press "Plot Chart"
-##Right part of the main window
+## Right part of the main window
 
 The following may be changed several times after clicking "plot chart".
 
@@ -45,7 +45,7 @@ B. Set min and max for axis. If these fields are left as defaults then the appli
 C. Legend xpos and ypos is a relative position (0-1) along axis and set position for the legend (if legend check box is activated). The legend may also be moved manually afterwards by point-and-click with the mouse.
 
 D. Check the box for grid lines if wanted and finally press "Redraw"
-#Remember
+# Remember
 
 The application will remember last selections in the left pane. This may cause performance issues if a table with big amounts of data is selected in any hidden tab and the user selects "Plot Chart" without checking all tabs first. -> Always check all tabs before pressing "Plot Chart"! 
 
